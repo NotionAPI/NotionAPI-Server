@@ -28,6 +28,7 @@
     "@nestjs/jwt": "^7.1.0",
     "@nestjs/passport": "^7.1.0",
     "@nestjs/platform-express": "^7.0.0",
+    "@nestjs/platform-fastify": "^7.4.2",
     "@types/axios": "^0.14.0",
     "@types/bcrypt": "^3.0.0",
     "@types/got": "^9.6.11",
