@@ -21,6 +21,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@google-cloud/firestore": "^4.2.0",
     "@google-cloud/secret-manager": "^3.1.0",
     "@nestjs/common": "^7.0.0",
     "@nestjs/core": "^7.0.0",
