@@ -1,0 +1,106 @@
+"""
+Represents unknown or dynamic data
+"""
+scalar Unknown
+type TextItem{
+  bold: Boolean
+  italic: Boolean
+  underline: Boolean
+  strikethrough: Boolean
+  isEquation: Boolean
+  link: String
+  textColor: String
+  bgColor: String
+  text: String
+}
+type TextBlockContent{
+  level: Int
+  items: [TextItem!]
+}
+type SectionBlockContent{
+  blocks: [String!]
+}
+type TodoBlockContent{
+  checked: Boolean!
+  items: [TextItem!]
+}
+"""
+Bulleted list, numbered list, quote
+"""
+type TextItemsBlockContent{
+  items: [TextItem!]
+}
+type CalloutBlockContent{
+  format: Unknown
+  items: [TextItem!]
+}
+union BlockContent = TextBlockContent | SectionBlockContent | TodoBlockContent | TextItemsBlockContent | CalloutBlockContent
+"""
+A block of a page.
+"""
+type Block{
+  id: String!
+  """
+  The type of block.
+  """
+  type: String!
+  """
+  The content of the block. Type "Unknown" because schema is dynamic.
+  """
+  content: BlockContent
+}
+"""
+The format of a page
+"""
+type Format{
+  cover: String
+  font: String
+}
+"""
+A property of the schema of a page and/or collection
+"""
+type SchemaProp{
+  title: String!
+  key: String!
+  type: String!
+  options: [Unknown!]
+}
+"""
+Metadata of a page or collection.
+"""
+type PageMetadata{
+  schema: [SchemaProp]
+  createdTime: Int
+  lastEditedTime: Int
+  format: Format
+}
+type Page{
+  id: String
+  metadata: PageMetadata
+  title: String
+  properties: Unknown
+  content: [Block!]
+}
+type Collection{
+  schema: [SchemaProp]
+  description: [TextItem!]
+  title: String
+  pages: [Page!]
+}
+input Filter{
+  property: String!
+  operator: String!
+  value: Unknown
+}
+type Query{
+  page(
+    pageId: String!
+  ): Page
+  collection(
+    collectionId: String!
+    collectionViewId: String!
+    filters: [Filter]
+    cursor: String
+    limit: String
+  ): Collection
+}
