@@ -11,13 +11,13 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # Install dependencies
-RUN npm install
+RUN yarn
 
 # Copy local code to the container image.
 COPY . ./
 
 # Build the application
-RUN npm run build
+RUN yarn build
 
 # Run the web service on container startup.
-CMD [ "npm", "run", "start:prod" ]
+CMD [ "yarn", "start:prod" ]
